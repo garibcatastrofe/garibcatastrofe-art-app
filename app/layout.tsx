@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins, Lora } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Navbar } from "@/components/navbar/Navbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,10 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${poppins.variable} ${lora.variable} antialiased`}>
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${poppins.variable} ${lora.variable} antialiased`}>
+          <Navbar />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

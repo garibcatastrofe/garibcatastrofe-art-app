@@ -1,10 +1,10 @@
 import { MainContainer } from "@/components/shared/MainContainer";
-import { HomeContent } from "@/content/home/HomeContent";
+import { AboutContent } from "@/content/about/AboutContent";
 
-export default function Home() {
+export default function About() {
   return (
     <MainContainer>
-      <HomeContent />
+      <AboutContent />
     </MainContainer>
   );
 }
