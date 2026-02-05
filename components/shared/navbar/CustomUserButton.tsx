@@ -11,6 +11,10 @@ export function CustomUserButton() {
   const { user } = useUser();
   const { signOut } = useAuth();
 
+  const toogleOpen = () => {
+    setOpen(!open);
+  };
+
   if (!user) return null;
 
   return (
@@ -20,9 +24,8 @@ export function CustomUserButton() {
       exit={{ opacity: 0, y: -8 }}
     >
       <motion.div
-        onHoverStart={() => setOpen(true)}
-        onHoverEnd={() => setOpen(false)}
-        className="flex items-center relative rounded-full gap-4 px-4 py-2 hover:bg-slate-800/50 transition-all duration-300 cursor-pointer"
+        className="flex items-center rounded-full gap-4 px-4 py-2 hover:bg-slate-800/50 transition-all duration-300 cursor-pointer relative"
+        onClick={toogleOpen}
       >
         <Image
           src={user.imageUrl}
@@ -32,26 +35,26 @@ export function CustomUserButton() {
           className="w-7 h-7 rounded-full"
         />
         <span className="text-white">{user.firstName}</span>
-
         {/* dropdown */}
         <motion.div
-          initial={{ opacity: 0 }}
+          className={`absolute right-0 -bottom-18 z-60 mt-2 w-48 rounded-xl bg-slate-800 shadow-xl border border-slate-700 p-2 ${open ? "" : "pointer-events-none"}`}
           animate={{ opacity: open ? 1 : 0, y: open ? [5, -1, 0] : 5 }}
-          className="absolute right-0 -bottom-18 z-60 pt-8"
         >
-          <div
-            className={`w-48 rounded-xl bg-slate-800 shadow-xl border border-slate-700 p-2`}
+          <button
+            onClick={() => signOut()}
+            className="w-full px-4 py-2 rounded-xl text-red-500 hover:bg-slate-700 flex items-center gap-2 justify-center cursor-pointer"
           >
-            <button
-              onClick={() => signOut()}
-              className="w-full px-4 py-2 rounded-xl text-red-500 hover:bg-slate-700 flex items-center gap-2 justify-center cursor-pointer"
-            >
-              <LogOut className="size-4" />
-              <span>Cerrar sesión</span>
-            </button>
-          </div>
+            <LogOut className="size-4" />
+            <span>Cerrar sesión</span>
+          </button>
         </motion.div>
       </motion.div>
+      {open && (
+        <div
+          className="absolute top-0 left-0 w-full z-50 h-dvh max-h-dvh max-w-dvw"
+          onClick={toogleOpen}
+        />
+      )}
     </motion.div>
   );
 }

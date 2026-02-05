@@ -1,7 +1,9 @@
+import { ComisionForm } from "@/components/interface/comision/ComisionForm";
+
 export function ComisionContent() {
   return (
-    <div>
-      <p>Comision content</p>
-    </div>
+    <section className="w-full min-h-dvh flex">
+      <ComisionForm />
+    </section>
   );
 }

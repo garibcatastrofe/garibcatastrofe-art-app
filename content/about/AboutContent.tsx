@@ -1,7 +1,9 @@
+import { ImageText } from "@/components/interface/about/ImageText";
+
 export function AboutContent() {
   return (
-    <div>
-      <p>About content</p>
-    </div>
+    <section className="w-full h-dvh flex items-center">
+      <ImageText />
+    </section>
   );
 }

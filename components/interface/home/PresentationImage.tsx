@@ -14,10 +14,9 @@ export function PresentationImage() {
       <Image
         src={pirita}
         alt="pirita"
-        fill
         unoptimized
         preload
-        className="object-cover object-center"
+        className="object-cover object-center w-full h-full"
       />
     </article>
   );
