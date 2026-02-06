@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { X } from "lucide-react";
 import { useModal } from "@/stores/modalStore";
@@ -19,7 +19,7 @@ export function Modal() {
     >
       {/* Modal Blanco con animación de rebote */}
       <motion.div
-        className="z-70 p-4 bg-white rounded-lg shadow-lg lg:w-150 md:w-125 w-[calc(100%-2rem)]"
+        className="z-70 p-6 bg-slate-950 border-2 border-neutral-100 rounded-lg shadow-lg lg:w-150 md:w-125 w-[calc(100%-2rem)]"
         initial={{ opacity: 0, y: 30 }} // Comienza un poco abajo
         animate={{
           opacity: isActivated ? 1 : 0,
@@ -35,17 +35,23 @@ export function Modal() {
         style={{
           position: "absolute",
           transform: "translate(-50%, -50%)", // Esto centra el modal
+          backdropFilter: "blur(5px)",
         }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between mb-2">
-          <h2 className="text-xl font-medium">{modalTitle}</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2
+            className="text-xl font-medium"
+            style={{ fontFamily: "var(--font-poppins)" }}
+          >
+            {modalTitle}
+          </h2>
           <X
             onClick={hacerModalFalso}
-            className="size-5 text-gray-600 transition duration-200 cursor-pointer hover:text-escuela"
+            className="size-5 text-gray-600 cursor-pointer"
           />
         </div>
-        <div className="p-2 overflow-y-auto scrollbar-custom">{modalBody}</div>
+        <div className="w-full h-auto">{modalBody}</div>
       </motion.div>
 
       {/* Fondo negro con animación */}

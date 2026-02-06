@@ -3,10 +3,8 @@ import { Poppins, Lora } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Navbar } from "@/components/shared/navbar/Navbar";
-import { ParticlesShapes } from "@/components/shared/particles/ParticlesShapes";
 import { Announcement } from "@/components/shared/announcement/Announcement";
 import { Footer } from "@/components/shared/footer/Footer";
-import { Modal } from "@/components/shared/modal/Modal";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -36,13 +34,7 @@ export default function RootLayout({
       <html lang="en" /* data-scroll-behavior="smooth" */>
         <body className={`${poppins.variable} ${lora.variable} antialiased`}>
           <Navbar />
-          <ParticlesShapes
-            backColor="#000000"
-            idContainer="hexagonos"
-            particleColor="#005907"
-          />
           <Announcement />
-          <Modal />
           {children}
           <Footer />
         </body>

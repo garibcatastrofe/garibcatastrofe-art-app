@@ -3,7 +3,7 @@ import { ComisionFormChildren } from "@/components/interface/comision/ComisionFo
 
 export function ComisionForm() {
   return (
-    <div className="flex justify-center items-center w-full h-fit flex-col z-10 pt-24">
+    <div className="flex justify-center items-center w-full g-fit flex-col z-10 pt-24">
       <h1 className="pb-2">¿Deseas una ilustración?</h1>
       <h2
         style={{ fontFamily: "var(--font-poppins)" }}

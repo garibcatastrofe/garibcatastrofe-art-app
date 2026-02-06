@@ -22,7 +22,7 @@ export function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       // Cambia a true cuando el scroll pasa cierto punto
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -41,7 +41,7 @@ export function Navbar() {
           : { backdropFilter: "blur(0px)" }
       }
       className={`fixed top-0 left-0 z-50 items-center flex transition-all duration-300 justify-between w-full px-10 ${
-        scrolled ? "bg-slate-950/70 shadow-md h-16" : "bg-transparent h-24"
+        scrolled ? "bg-slate-900/80 shadow-md h-16" : "bg-transparent h-24"
       }`}
     >
       <div className="flex items-center h-full gap-4 w-fit">

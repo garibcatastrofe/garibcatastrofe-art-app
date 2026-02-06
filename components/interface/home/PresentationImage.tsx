@@ -1,4 +1,4 @@
-import pirita from "@/images/home/us.png";
+import pirita from "@/images/home/pirita.png";
 import Image from "next/image";
 import { DynamicText } from "./DynamicText";
 

@@ -5,9 +5,10 @@ import { Image as Imagensita } from "lucide-react";
 
 type ImageUrlPreviewProps = {
   url?: string;
+  rounded: boolean;
 };
 
-export function ImageUrlPreview({ url }: ImageUrlPreviewProps) {
+export function ImageUrlPreview({ url, rounded }: ImageUrlPreviewProps) {
   const [isValid, setIsValid] = useState<boolean | null>(null);
 
   const isAbsoluteHttpsUrl = (value: string) => {
@@ -50,13 +51,15 @@ export function ImageUrlPreview({ url }: ImageUrlPreviewProps) {
   }, [url, validateUrl]);
 
   return !url || isValid !== true ? (
-    <Imagensita className="size-10" />
+    <div className="w-full h-full flex items-center justify-center">
+      <Imagensita className="size-10" />
+    </div>
   ) : (
-    <picture>
+    <picture className={`w-full h-full ${rounded ? "rounded-xl" : "rounded-none"}`}>
       <img
         src={url}
         alt="preview"
-        className="w-full h-full object-cover object-center"
+        className={`w-full h-full object-cover object-center ${rounded ? "rounded-xl" : "rounded-none"}`}
       />
     </picture>
   );
