@@ -12,9 +12,11 @@ export function ComisionForm() {
         Ponte en contacto
       </h2>
 
-      <LoginButtons>
-        <ComisionFormChildren />
-      </LoginButtons>
+      <ComisionFormChildren />
+
+      {/* <LoginButtons>
+        
+      </LoginButtons> */}
     </div>
   );
 }

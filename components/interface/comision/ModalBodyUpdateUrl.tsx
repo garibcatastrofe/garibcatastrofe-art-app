@@ -2,10 +2,10 @@
 
 import { useFormContext } from "react-hook-form";
 import { ImageUrlPreview } from "./ImageUrlPreview";
-import { FormValues } from "./ComisionFormChildren";
+import { ComisionFormValues } from "./ComisionFormChildren";
 
 export function ModalBodyUpdateUrl({ index }: { index: number }) {
-  const { setValue, watch } = useFormContext<FormValues>();
+  const { setValue, watch } = useFormContext<ComisionFormValues>();
 
   const value = watch(`referencias.${index}.url`);
 

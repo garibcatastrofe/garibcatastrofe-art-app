@@ -13,6 +13,16 @@ import { ImageUrlPreview } from "@/components/interface/comision/ImageUrlPreview
 import { Modal } from "@/components/shared/modal/Modal";
 import { ModalBodyUpdateUrl } from "@/components/interface/comision/ModalBodyUpdateUrl";
 
+/* HOOKS */
+import {
+  useForm,
+  Controller,
+  FormProvider,
+  useFieldArray,
+  useWatch,
+} from "react-hook-form";
+import { useState } from "react";
+
 /* ICONS */
 import {
   PencilLine,
@@ -25,28 +35,18 @@ import {
 } from "lucide-react";
 
 /* SERVER ACTIONS */
-import { newComisionController } from "@/app/controllers/newComisionController";
+import { InsertComision } from "@/src/Comisions/Infrastructure/comisionController";
 
 /* STORES */
 import { useAnnouncement } from "@/stores/announcementStore";
 import { useModal } from "@/stores/modalStore";
-
-/* HOOKS */
-import {
-  useForm,
-  Controller,
-  FormProvider,
-  useFieldArray,
-  useWatch,
-} from "react-hook-form";
-import { useState } from "react";
 
 /* LIBRARIES */
 import { motion } from "framer-motion";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
-export type FormValues = {
+export type ComisionFormValues = {
   tipo: "digital" | "tradicional";
   descripcion: string;
   referencias: {
@@ -60,7 +60,7 @@ export function ComisionFormChildren() {
   const { setModal } = useModal();
   const [terminado, setTerminado] = useState(true);
 
-  const methods = useForm<FormValues>({
+  const methods = useForm<ComisionFormValues>({
     defaultValues: {
       tipo: "digital",
       descripcion: "",
@@ -79,29 +79,35 @@ export function ComisionFormChildren() {
     name: "referencias",
   });
 
-  const onSubmit = async (data: {
-    tipo: string;
-    descripcion: string;
-    referencias: { url: string }[];
-    fecha_vencimiento?: Date | undefined;
-  }) => {
+  const onSubmit = async (data: ComisionFormValues) => {
     try {
-      console.log("Enviando datos...");
+      console.log("Enviando datos desde el cliente...");
+      console.log("data: ", data);
 
       setTerminado(false);
 
-      const response = await newComisionController(data);
+      const response = await InsertComision(data);
 
       if (response.ok) {
         setAnnouncement(
           true,
           "bg-green-700",
-          <p className="text-white">¡Comisión solicitada correctamente!</p>,
+          <p className="text-white">Correo envíado correctamente</p>,
         );
+        setTerminado(true);
+        methods.reset();
+      } else {
+        setAnnouncement(
+          true,
+          "bg-red-700",
+          <p className="text-white">
+            Ocurrió un error al envíar el correo: Revise los datos e intente
+            nuevamente
+          </p>,
+        );
+        setTerminado(true);
       }
 
-      setTerminado(true);
-      methods.reset();
       console.log(response);
     } catch (error) {
       console.error("Error", error);
@@ -188,7 +194,7 @@ export function ComisionFormChildren() {
                 onChange={onChange}
                 value={value}
                 id="descripcion"
-                minLength={30}
+                minLength={1}
                 maxLength={750}
                 placeholder="Por ejemplo: Me gustaría que mi ilustración tuviera... Quiero que mi ilustración sea de un estilo... Según los links adjuntos, quiero que combines todo y..."
                 className="w-full h-40 p-4 bg-transparent outline-none border-2 border-neutral-100 resize-none rounded-xl hover:bg-slate-900/50 transition-all duration-300 placeholder:text-neutral-500"
