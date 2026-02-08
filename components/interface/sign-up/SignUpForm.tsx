@@ -6,6 +6,9 @@ import { Loader, Upload } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { useAnnouncement } from "@/stores/announcementStore";
 import { useState } from "react";
+import { SignUp } from "@/src/Users/Infrastructure/userController";
+import { useRouter } from "next/navigation";
+import { useSignIn } from "@clerk/nextjs";
 
 export type SignUpFormValues = {
   correo: string;
@@ -17,6 +20,8 @@ export type SignUpFormValues = {
 export function SignUpForm() {
   const { setAnnouncement } = useAnnouncement();
   const [terminado, setTerminado] = useState(true);
+  const router = useRouter();
+  const { isLoaded, signIn, setActive } = useSignIn();
 
   const methods = useForm<SignUpFormValues>({
     defaultValues: {
@@ -29,34 +34,56 @@ export function SignUpForm() {
 
   const onSubmit = async (data: SignUpFormValues) => {
     try {
-      console.log("Enviando datos...");
+      console.log("Enviando datos desde el cliente...");
+      console.log(data);
 
       setTerminado(false);
 
-      // Simulación de proceso
-      await new Promise((r) => setTimeout(r, 3000));
+      if (!isLoaded || !signIn || !setActive) {
+        console.warn("El gestor de sesión todavía no está listo");
+        return;
+      }
 
-      setAnnouncement(
-        true,
-        "bg-green-700",
-        <p className="text-white">¡Sesión iniciada correctamente!</p>,
-      );
+      const response = await SignUp(data);
 
-      setTerminado(true);
+      if (response.ok) {
+        setAnnouncement(
+          true,
+          "bg-green-700",
+          <p className="text-white">{response.message}</p>,
+        );
 
-      /* const response = await newComisionController(data);
-  
-        if (response.ok) {
+        setTerminado(true);
+
+        const signInResult = await signIn.create({
+          identifier: data.correo,
+          password: data.password,
+        });
+
+        if (signInResult.status !== "complete") {
           setAnnouncement(
             true,
-            "bg-green-700",
-            <p className="text-white">¡Sesión iniciada correctamente!</p>,
+            "bg-red-700",
+            <p className="text-white">
+              Error en el servidor al iniciar sesión
+            </p>,
           );
+          return;
         }
-  
+
+        await setActive({ session: signInResult.createdSessionId });
+
+        router.refresh();
+        router.push("/");
+      } else {
+        setAnnouncement(
+          true,
+          "bg-red-700",
+          <p className="text-white">{response.message}</p>,
+        );
+
         setTerminado(true);
-        methods.reset();
-        console.log(response); */
+      }
     } catch (error) {
       console.error("Error", error);
     }

@@ -1,18 +1,32 @@
 "use client";
 
 import { useUser, useAuth } from "@clerk/nextjs";
-import Image from "next/image";
+/* import Image from "next/image"; */
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { LogOut } from "lucide-react";
+import { LogOut, UserRound } from "lucide-react";
+import { useAnnouncement } from "@/stores/announcementStore";
 
 export function CustomUserButton() {
   const [open, setOpen] = useState(false);
   const { user } = useUser();
   const { signOut } = useAuth();
+  const { setAnnouncement } = useAnnouncement();
 
   const toogleOpen = () => {
     setOpen(!open);
+  };
+
+  const logout = () => {
+    setAnnouncement(
+      true,
+      "bg-green-700",
+      <p className="text-white">
+        Sesión cerrada correctamente, redirigiendo al index...
+      </p>,
+    );
+
+    signOut({ redirectUrl: "/" });
   };
 
   if (!user) return null;
@@ -24,16 +38,17 @@ export function CustomUserButton() {
       exit={{ opacity: 0, y: -8 }}
     >
       <motion.div
-        className="flex items-center rounded-full gap-4 px-4 py-2 hover:bg-slate-800/50 transition-all duration-300 cursor-pointer relative"
+        className="flex items-center rounded-full gap-2 px-4 py-2 hover:bg-green-600 bg-green-700 transition-all duration-300 cursor-pointer relative"
         onClick={toogleOpen}
       >
-        <Image
+        {/* <Image
           src={user.imageUrl}
           alt="avatar"
           width={32}
           height={32}
           className="w-7 h-7 rounded-full"
-        />
+        /> */}
+        <UserRound className="size-4 text-white" />
         <span className="text-white">{user.firstName}</span>
         {/* dropdown */}
         <motion.div
@@ -41,7 +56,7 @@ export function CustomUserButton() {
           animate={{ opacity: open ? 1 : 0, y: open ? [5, -1, 0] : 5 }}
         >
           <button
-            onClick={() => signOut()}
+            onClick={logout}
             className="w-full px-4 py-2 rounded-xl text-red-500 hover:bg-slate-700 flex items-center gap-2 justify-center cursor-pointer"
           >
             <LogOut className="size-4" />

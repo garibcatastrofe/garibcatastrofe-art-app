@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { socialMediaButtons } from "@/data/navbar/socialMediaButtons";
 import { links } from "@/data/navbar/links";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CustomUserButton } from "./CustomUserButton";
 import { LoginButtons } from "../LoginButtons";
+import { SignedIn } from "@clerk/nextjs";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -59,15 +60,33 @@ export function Navbar() {
       </div>
 
       <div className="flex gap-4 text-white">
-        {links.map((link, i) => (
-          <Link
-            className={`${linkClasses(link.href)} rounded-full py-2 px-4`}
-            key={i}
-            href={link.href}
-          >
-            {link.title}
-          </Link>
-        ))}
+        {links.map((link, i) => {
+          if (link.title === "Comisionar") {
+            return (
+              <Suspense key={i} fallback={<div>Cargando...</div>}>
+                <SignedIn>
+                  <Link
+                    className={`${linkClasses(link.href)} rounded-full py-2 px-4`}
+                    key={i}
+                    href={link.href}
+                  >
+                    {link.title}
+                  </Link>
+                </SignedIn>
+              </Suspense>
+            );
+          } else {
+            return (
+              <Link
+                className={`${linkClasses(link.href)} rounded-full py-2 px-4`}
+                key={i}
+                href={link.href}
+              >
+                {link.title}
+              </Link>
+            );
+          }
+        })}
       </div>
 
       <LoginButtons>

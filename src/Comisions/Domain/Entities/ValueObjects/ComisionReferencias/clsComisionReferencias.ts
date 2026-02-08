@@ -1,3 +1,4 @@
+import { clsBadRequestError } from "@/src/Shared/Domain/Entities/Errors/clsBadRequestError";
 import { IUrlObjectPrimitive } from "../../../Interfaces/IComisionPrimitive";
 import { clsUrlObject } from "./clsUrlObject";
 
@@ -11,7 +12,7 @@ export class clsComisionReferencias {
 
   private ensureIsValid(urlArray: clsUrlObject[]): void {
     if (urlArray.length > 5) {
-      throw new Error("No puedes mandar más de 5 url");
+      throw new clsBadRequestError("No puedes mandar más de 5 url");
     }
   }
 

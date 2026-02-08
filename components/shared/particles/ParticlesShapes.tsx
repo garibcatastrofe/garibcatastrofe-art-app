@@ -26,7 +26,7 @@ export function ParticlesShapes({
   }, []);
 
   return (
-    <div className="w-full h-dvh absolute top-0 left-0 overflow-hidden">
+    <div className="w-full h-full absolute top-0 left-0 overflow-hidden">
       {init && (
         <Particles
           id={idContainer}

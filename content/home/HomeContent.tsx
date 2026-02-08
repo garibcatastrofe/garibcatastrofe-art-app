@@ -5,14 +5,14 @@ export function HomeContent() {
   return (
     <section className="w-full h-fit">
       <PresentationImage />
-      <div className="w-full h-dvh relative flex items-center justify-center">
+      <div className="w-full h-[calc(50dvh)] relative flex items-center justify-center">
         <ParticlesShapes
           idContainer="particulasHome"
           backColor="#000000"
-          particleColor="#005907"
+          particleColor="#0EA114"
         />
         <div className="z-50">
-          <p className="text-white">Aquí va el contenido</p>
+          <h1 className="text-white text-7xl">Arte, conversación y mundos de fantasía</h1>
         </div>
       </div>
     </section>

@@ -100,10 +100,7 @@ export function ComisionFormChildren() {
         setAnnouncement(
           true,
           "bg-red-700",
-          <p className="text-white">
-            Ocurrió un error al envíar el correo: Revise los datos e intente
-            nuevamente
-          </p>,
+          <p className="text-white">{response.message}</p>,
         );
         setTerminado(true);
       }

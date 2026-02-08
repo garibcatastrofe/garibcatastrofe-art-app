@@ -1,3 +1,4 @@
+import { clsBadRequestError } from "@/src/Shared/Domain/Entities/Errors/clsBadRequestError";
 import { IUrlObjectPrimitive } from "../../../Interfaces/IComisionPrimitive";
 
 export class clsUrlObject {
@@ -12,7 +13,7 @@ export class clsUrlObject {
     if (!url || url.length === 0 || url === "") return null;
 
     if (url.length >= 750) {
-      throw new Error("Las url deben ser menores a 750");
+      throw new clsBadRequestError("Las url deben ser menores a 750 caracteres");
     }
 
     // Si pasa todas las validaciones, se crea la instancia

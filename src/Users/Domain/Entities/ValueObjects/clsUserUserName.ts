@@ -1,6 +1,6 @@
 import { clsBadRequestError } from "@/src/Shared/Domain/Entities/Errors/clsBadRequestError";
 
-export class clsComisionDescripcion {
+export class clsUserUserName {
   public value: string;
 
   public constructor(value: string) {
@@ -9,16 +9,17 @@ export class clsComisionDescripcion {
   }
 
   private EnsureIsValid(value: string): void {
-    if (!value) throw new clsBadRequestError("La descripción es necesaria");
+    if (!value)
+      throw new clsBadRequestError("El nombre de usuario es necesario");
 
-    if (value.length < 100)
+    if (value.length < 5)
       throw new clsBadRequestError(
-        "La descripción debe ser mayor de 100 caracteres",
+        "El nombre de usuario debe ser mayor de 5 caracteres",
       );
 
-    if (value.length > 750)
+    if (value.length > 50)
       throw new clsBadRequestError(
-        "La descripción debe ser menor a 750 caracteres",
+        "El nombre de usuario debe ser menor a 50 caracteres",
       );
   }
 }

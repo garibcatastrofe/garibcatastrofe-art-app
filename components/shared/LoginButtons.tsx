@@ -22,8 +22,6 @@ export function LoginButtons({ children }: { children: React.ReactNode }) {
           >
             Registrarse
           </Link>
-          {/* <SignInButton></SignInButton>
-          <SignUpButton></SignUpButton> */}
         </div>
       </SignedOut>
       <SignedIn>{children}</SignedIn>

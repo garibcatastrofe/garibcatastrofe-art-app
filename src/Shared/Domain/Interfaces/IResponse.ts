@@ -1,4 +1,4 @@
-export type Response = {
+export interface IResponse {
   ok: boolean;
   message: string;
-};
+}

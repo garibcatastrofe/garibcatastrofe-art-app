@@ -1,7 +1,8 @@
 "use server";
 
 /* TYPES */
-import { Response } from "@/src/Shared/response";
+import { IResponse } from "@/src/Shared/Domain/Interfaces/IResponse";
+import { handleServerError } from "@/src/Shared/Domain/utils/handleServerError";
 
 /* SERVICE */
 import { ServiceContainer } from "@/src/Shared/Infrastructure/ServiceContainer";
@@ -13,7 +14,7 @@ export async function InsertComision(data: {
   descripcion: string;
   referencias: { url: string }[];
   fecha_vencimiento?: Date;
-}): Promise<Response> {
+}): Promise<IResponse> {
   try {
     console.log("Entrando al controller de insert comision...");
 
@@ -24,11 +25,7 @@ export async function InsertComision(data: {
       ok: true,
       message: "Correo enviado correctamente: " + comisionId.toString(),
     };
-  } catch {
-    return {
-      ok: false,
-      message:
-        "Error al envíar el correo: Verifique los datos e intente nuevamente",
-    };
+  } catch (error) {
+    return handleServerError(error);
   }
 }

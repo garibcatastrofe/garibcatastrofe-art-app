@@ -1,6 +1,7 @@
 import { IUrlObjectPrimitive } from "../Domain/Interfaces/IComisionPrimitive";
+import { IComisionRepository } from "../Domain/Interfaces/IComisionRepository";
 
-export class clsComisionRepository {
+export class clsComisionRepository implements IComisionRepository {
   public async InsertComisionAsync(data: {
     tipo: string;
     descripcion: string;
