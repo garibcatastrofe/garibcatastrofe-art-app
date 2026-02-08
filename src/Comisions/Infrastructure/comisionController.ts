@@ -16,8 +16,6 @@ export async function InsertComision(data: {
   fecha_vencimiento?: Date;
 }): Promise<IResponse> {
   try {
-    console.log("Entrando al controller de insert comision...");
-
     const comisionId = await Comision.InsertComision.InsertComisionAsync(data);
 
     // Response

@@ -19,7 +19,5 @@ export class clsComision {
     this.comisionDescripcion = descripcion;
     this.comisionReferencias = referencias;
     this.comisionFechaVencimiento = fecha_vencimiento;
-
-    console.log("Pasó el constructor de comisión")
   }
 }
