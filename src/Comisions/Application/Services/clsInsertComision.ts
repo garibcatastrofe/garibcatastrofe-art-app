@@ -19,17 +19,11 @@ export class clsInsertComision {
     referencias,
     fecha_vencimiento,
   }: IComisionCreateDto): Promise<number> {
-    console.log("Entrando al service de insert comision...");
-
     const referenciasVerificadas = referencias
       .map((r) => clsUrlObject.create(r.url))
       .filter((ref) => ref !== null);
 
-    console.log("Pasó la verificación de referencias");
-
     const tipoVerificado = new clsComisionTipo(tipo);
-
-    console.log("Pasó el tipo verificado");
 
     const newComision = new clsComision(
       tipoVerificado,

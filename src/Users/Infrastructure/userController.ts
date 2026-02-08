@@ -16,8 +16,6 @@ export async function SignUp(data: {
   password_confirm: string;
 }): Promise<IResponse> {
   try {
-    console.log("Entrando al controller de sign up...");
-
     await User.SignUp.SignUpAsync(data);
 
     return {
@@ -35,8 +33,6 @@ export async function SignIn(data: {
   password: string;
 }): Promise<IResponse> {
   try {
-    console.log("Entrando al controller de sign in...");
-
     await User.SignIn.SignInAsync(data);
 
     return {

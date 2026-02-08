@@ -39,7 +39,7 @@ export function DynamicText() {
     return () => clearInterval(cursorInterval);
   }, []);
   return (
-    <div className="absolute z-40 flex flex-col gap-4 bottom-10 left-10">
+    <div className="absolute z-40 flex flex-col gap-4 bottom-20 left-20">
       <h2 className="mr-10 font-bold text-white text-7xl">Hola, soy</h2>
       <div className="flex">
         <p className="font-bold text-white text-7xl">{currentText}</p>

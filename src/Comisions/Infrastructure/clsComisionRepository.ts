@@ -11,9 +11,6 @@ export class clsComisionRepository implements IComisionRepository {
     // Simulación de proceso
     await new Promise((r) => setTimeout(r, 3000));
 
-    console.log("Entrando al repositorio de insert comision...");
-    console.log("data entrando: ", data);
-
     // Guardar en DB, enviar correo, etc
     return 123;
   }

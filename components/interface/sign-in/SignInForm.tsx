@@ -30,13 +30,9 @@ export function SignInForm() {
 
   const onSubmit = async (data: SignInFormValues) => {
     try {
-      console.log("Enviando datos desde el cliente...");
-      console.log(data);
-
       setTerminado(false);
 
       if (!isLoaded || !signIn || !setActive) {
-        console.warn("El gestor de sesión todavía no está listo");
         return;
       }
 
@@ -83,7 +79,7 @@ export function SignInForm() {
 
       setTerminado(true);
     } catch (error) {
-      console.error("Error", error);
+      console.log("Error", error);
     }
   };
 

@@ -81,9 +81,6 @@ export function ComisionFormChildren() {
 
   const onSubmit = async (data: ComisionFormValues) => {
     try {
-      console.log("Enviando datos desde el cliente...");
-      console.log("data: ", data);
-
       setTerminado(false);
 
       const response = await InsertComision(data);
@@ -104,10 +101,8 @@ export function ComisionFormChildren() {
         );
         setTerminado(true);
       }
-
-      console.log(response);
     } catch (error) {
-      console.error("Error", error);
+      console.log("Error", error);
     }
   };
 
