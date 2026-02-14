@@ -8,6 +8,10 @@ export const links: { title: string; href: string }[] = [
     href: "/about",
   },
   {
+    title: "Contacto",
+    href: "/contact",
+  },
+  {
     title: "Comisionar",
     href: "/comision",
   },
