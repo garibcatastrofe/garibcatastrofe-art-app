@@ -54,6 +54,7 @@ export function ContactFormChildren() {
     },
   });
 
+  // Método para envíar correo
   const onSubmit = async (data: ContactFormValues) => {
     try {
       setTerminado(false);
