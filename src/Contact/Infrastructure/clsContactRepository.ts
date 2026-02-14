@@ -12,9 +12,9 @@ export class clsContactRepository implements IContactRepository {
     asunto: string;
     mensaje: string;
   }): Promise<number> {
-    console.log("Datos en el repositorio: ", data);
+    /* console.log("Datos en el repositorio: ", data); */
 
-    const response = await resend.emails.send({
+    await resend.emails.send({
       from: `Formulario de contacto <${process.env.EMAIL_FROM}>` /* "Resend <onboarding@resend.dev>" */,
       to: [process.env.EMAIL_TO!],
       replyTo: data.correo,
@@ -31,7 +31,7 @@ export class clsContactRepository implements IContactRepository {
       `,
     });
 
-    console.log(response);
+    /* console.log(response); */
 
     return 123;
   }
