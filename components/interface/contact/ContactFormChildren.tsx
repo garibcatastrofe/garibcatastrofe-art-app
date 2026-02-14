@@ -57,7 +57,7 @@ export function ContactFormChildren() {
   const onSubmit = async (data: ContactFormValues) => {
     try {
       setTerminado(false);
-      console.log("Datos desde el front: ", data)
+      /* console.log("Datos desde el front: ", data) */
 
       const response = await SendMail(data);
 
